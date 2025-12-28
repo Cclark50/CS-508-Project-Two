@@ -5,24 +5,24 @@ public class DBEntry {
     private String _county;
     private String _state;
     private String _vpu;
-    private String _bev;
-    private String _phev;
-    private String _evTotal;
-    private String _nonElectTotal;
-    private String _totVehicles;
-    private String _elecPercent;
+    private int _bev;
+    private int _phev;
+    private int _evTotal;
+    private int _nonElectTotal;
+    private int _totVehicles;
+    private double _elecPercent;
 
     public DBEntry(
             String _date,
             String _county,
             String _state,
             String _vpu,
-            String _bev,
-            String _phev,
-            String _evTotal,
-            String _nonElectTotal,
-            String _totVehicles,
-            String _elecPercent
+            int _bev,
+            int _phev,
+            int _evTotal,
+            int _nonElectTotal,
+            int _totVehicles,
+            double _elecPercent
     ) {
         this._date = _date;
         this._county = _county;
@@ -68,51 +68,55 @@ public class DBEntry {
         this._vpu = _vpu;
     }
 
-    public String get_bev() {
+    public int get_bev() {
         return _bev;
     }
 
     public void set_bev(String _bev) {
-        this._bev = _bev;
+        this._bev = Integer.parseInt(_bev);
     }
 
-    public String get_phev() {
+    public int get_phev() {
         return _phev;
     }
 
     public void set_phev(String _phev) {
-        this._phev = _phev;
+        this._phev = Integer.parseInt(_phev);
     }
 
-    public String get_evTotal() {
+    public int get_evTotal() {
         return _evTotal;
     }
 
     public void set_evTotal(String _evTotal) {
-        this._evTotal = _evTotal;
+        this._evTotal = Integer.parseInt(_evTotal);
     }
 
-    public String get_nonElectTotal() {
+    public int get_nonElectTotal() {
         return _nonElectTotal;
     }
     public void set_nonElectTotal(String _nonElectTotal) {
-        this._nonElectTotal = _nonElectTotal;
+        this._nonElectTotal = Integer.parseInt(_nonElectTotal);
     }
 
-    public String get_totVehicles() {
+    public int get_totVehicles() {
         return _totVehicles;
     }
 
     public void set_totVehicles(String _totVehicles) {
-        this._totVehicles = _totVehicles;
+        this._totVehicles = Integer.parseInt(_totVehicles);
     }
 
-    public String get_elecPercent() {
+    public double get_elecPercent() {
         return _elecPercent;
     }
 
     public void set_elecPercent(String _elecPercent) {
-        this._elecPercent = _elecPercent;
+        this._elecPercent = Double.parseDouble(_elecPercent);
     }
 
+    @Override
+    public String toString() {
+        return _date + "," + _county + "," + _state + "," + _vpu + "," + _bev + "," + _phev + "," + _evTotal + "," + _nonElectTotal + "," + _totVehicles + "," + _elecPercent;
+    }
 }
