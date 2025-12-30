@@ -13,7 +13,7 @@ public class Main {
         ArrayList<DBEntry> list = db.LoadDB();
         Scanner scnr = new Scanner(System.in);
         boolean exit = false;
-        Character[] allowedChars = {'a', 'b', 'c', 'q'};
+        Character[] allowedChars = {'a', 'b', 'q'};
         String input;
         try{
             while(!exit){
@@ -27,13 +27,10 @@ public class Main {
                 }
                 switch (input.charAt(0)){
                     case 'a':
-                        StateFilterSelection(list, scnr, db);
+                        StateFilterSelection(scnr, db);
                         break;
                     case 'b':
-                        GenerateStatistics(list, db);
-                        break;
-                    case 'c':
-                        //SortByElecPercent(list);
+                        GenerateStatistics(db);
                         break;
                     case 'q':
                         exit = true;
@@ -48,7 +45,7 @@ public class Main {
         }
     }
 
-    private static void GenerateStatistics(ArrayList<DBEntry> list, Database db) {
+    private static void GenerateStatistics(Database db) {
         SummaryStatistics stats = db.GetSummary();
         System.out.printf("Average EV Percentage: %.2f%%\n", stats._avgPercentEvs);
         System.out.println("Total number of EVs (BEVs and PHEVs): " + stats._totalEvs);
@@ -64,7 +61,7 @@ public class Main {
         System.out.printf("State with the Highest Percentage of EVs: %s\n", highestPer);
     }
 
-    public static void StateFilterSelection(ArrayList<DBEntry> list, Scanner scnr, Database db){
+    public static void StateFilterSelection(Scanner scnr, Database db){
         System.out.println("Enter the state code to filter by");
         String input = scnr.nextLine();
         try{
@@ -74,7 +71,8 @@ public class Main {
             if(input.length() != 2){
                 throw new IllegalArgumentException("Invalid input");
             }
-            var filtered = db.FilterByState(list, input);
+            //var filtered = db.FilterByState(list, input);
+            var filtered = db.GetFilteredByState(input);
             PrintList(filtered);
             System.out.println("\n------------------------------------------");
             System.out.println("Write this filtered list to output? Y or N");
@@ -104,7 +102,6 @@ public class Main {
         System.out.println("\nProject Two Menu:");
         System.out.println("a - Filter by State");
         System.out.println("b - Generate Statistics");
-        System.out.println("c - Sort by Electric Vehicle Percentage");
         System.out.println("q - Quit");
         System.out.println("------------------------");
     }

@@ -77,6 +77,10 @@ public class Database {
         return filtered;
     }
 
+    public List<DBEntry> GetFilteredByState(String state){
+        return _stateIndex.get(state).GetEntries();
+    }
+
     public void PrintList(){
         for(DBEntry entry : _DB){
             System.out.println(entry);
