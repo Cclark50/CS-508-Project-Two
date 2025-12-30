@@ -13,7 +13,7 @@ public class Main {
         ArrayList<DBEntry> list = db.LoadDB();
         Scanner scnr = new Scanner(System.in);
         boolean exit = false;
-        Character[] allowedChars = {'a', 'b', 'q'};
+        Character[] allowedChars = {'a', 'b', 'c', 'q'};
         String input;
         try{
             while(!exit){
@@ -31,6 +31,9 @@ public class Main {
                         break;
                     case 'b':
                         GenerateStatistics(db);
+                        break;
+                    case 'c':
+                        db.PrintList();
                         break;
                     case 'q':
                         exit = true;
@@ -58,7 +61,7 @@ public class Main {
                 highestPer = state.getKey();
             }
         }
-        System.out.printf("State with the Highest Percentage of EVs: %s\n", highestPer);
+        System.out.printf("State with the Highest Percentage of EVs: %s with %.2f%%\n", highestPer, max);
     }
 
     public static void StateFilterSelection(Scanner scnr, Database db){
@@ -102,6 +105,7 @@ public class Main {
         System.out.println("\nProject Two Menu:");
         System.out.println("a - Filter by State");
         System.out.println("b - Generate Statistics");
+        System.out.println("c - Print Sorted List (by Electric EV Percentage)");
         System.out.println("q - Quit");
         System.out.println("------------------------");
     }

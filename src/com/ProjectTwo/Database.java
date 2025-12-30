@@ -63,6 +63,7 @@ public class Database {
             System.out.println("Number of states in state index: " + _stateIndex.size());
             QuickSortInPlace(list, 0, list.size() - 1, Comparator.comparingDouble(DBEntry::get_elecPercent).reversed());
             WriteToOutput(list, "Sorted out.csv");
+            _DB = list;
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -70,9 +71,9 @@ public class Database {
     }
 
     public List<DBEntry> FilterByState(ArrayList<DBEntry> list, String state){
-        Predicate<DBEntry> isWA = entry -> entry.get_state().equals(state);
+        Predicate<DBEntry> isState = entry -> entry.get_state().equals(state);
         List<DBEntry> filtered = list.parallelStream()
-                .filter(isWA)
+                .filter(isState)
                 .toList();
         return filtered;
     }
@@ -105,6 +106,7 @@ public class Database {
         return true;
     }
 
+    // Using my quicksort in place I wrote for project one but modified for an arraylist
     public static <T> void QuickSortInPlace(List<T> list, int a, int b, Comparator<T> c){
         if (a >= b) return;
         T pivot = list.get(b);
@@ -112,7 +114,6 @@ public class Database {
         int left = a;
         int right = b - 1;
         while (left <= right){
-            //System.out.println("while loop");
             while(left <= right && c.compare(list.get(left), pivot) < 0){
                 left++;
             }
