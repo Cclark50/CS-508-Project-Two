@@ -52,6 +52,16 @@ public class Main {
         SummaryStatistics stats = db.GetSummary();
         System.out.printf("Average EV Percentage: %.2f%%\n", stats._avgPercentEvs);
         System.out.println("Total number of EVs (BEVs and PHEVs): " + stats._totalEvs);
+        var states = db.GetStateIndex();
+        double max = 0.0f;
+        String highestPer = "nil";
+        for(Map.Entry<String, StateIndex> state : states.entrySet()){
+            if(state.getValue().GetAvgEVPercent() > max){
+                max = state.getValue().GetAvgEVPercent();
+                highestPer = state.getKey();
+            }
+        }
+        System.out.printf("State with the Highest Percentage of EVs: %s\n", highestPer);
     }
 
     public static void StateFilterSelection(ArrayList<DBEntry> list, Scanner scnr, Database db){

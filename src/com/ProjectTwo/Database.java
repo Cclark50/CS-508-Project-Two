@@ -11,7 +11,7 @@ public class Database {
 
     private List<DBEntry> _DB;
 
-    private Map<String, List<DBEntry>> _stateIndex;
+    private Map<String, StateIndex> _stateIndex;
 
     private SummaryStatistics _summaryStatistics;
 
@@ -28,7 +28,7 @@ public class Database {
         return _summaryStatistics;
     }
 
-    public Map<String, List<DBEntry>> GetStateIndex(){
+    public Map<String, StateIndex> GetStateIndex(){
         return _stateIndex;
     }
 
@@ -53,9 +53,9 @@ public class Database {
                 _summaryStatistics._totalEvs += entry.get_bev() + entry.get_phev();
                 list.add(entry);
                 if(!_stateIndex.containsKey(entry.get_state())){
-                    _stateIndex.put(entry.get_state(), new ArrayList<>());
+                    _stateIndex.put(entry.get_state(), new StateIndex(entry.get_state()));
                 }
-                _stateIndex.get(entry.get_state()).add(entry);
+                _stateIndex.get(entry.get_state()).AddEntry(entry);
             }
             _summaryStatistics._totalCount = count;
             _summaryStatistics._totalPercentEV = totalEVPercent;
