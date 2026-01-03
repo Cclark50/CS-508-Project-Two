@@ -107,6 +107,7 @@ public class Database {
     }
 
     // Using my quicksort in place I wrote for project one but modified for an arraylist
+    // Original Algorithm from Zybooks CS508 Data Structures and Algorithms: 4.2.2
     public static <T> void QuickSortInPlace(List<T> list, int a, int b, Comparator<T> c){
         if (a >= b) return;
         T pivot = list.get(b);

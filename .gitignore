@@ -1,2 +1,6 @@
 *.csv
 termoutput.txt
+*.class
+!CS 508 Project Two Data Set.csv
+out/
+.DS_Store
